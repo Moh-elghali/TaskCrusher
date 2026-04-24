@@ -1,0 +1,412 @@
+/* =====================================================
+   Taskly — Warm & Humanized
+   Font: Nunito (friendly, rounded, approachable)
+   Palette: Warm cream + soft terracotta + muted greens
+   ===================================================== */
+
+:root {
+  --cream:      #fdf8f2;
+  --paper:      #ffffff;
+  --border:     #e8ddd1;
+  --text:       #3a2e24;
+  --muted:      #9b8b7a;
+  --accent:     #d4733a;       /* terracotta */
+  --accent-lt:  #faeee4;
+  --green:      #4a8c6f;
+  --green-lt:   #e3f5ec;
+  --red:        #c0392b;
+  --red-lt:     #fce8e6;
+  --shadow:     0 2px 12px rgba(58,46,36,.08);
+  --radius:     14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.65;
+}
+
+/* ── Nav ──────────────────────────────────────────── */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .9rem 1.75rem;
+  background: var(--paper);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: -.01em;
+}
+
+.logout-btn {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  padding: .4rem .85rem;
+  border: 1.5px solid var(--border);
+  border-radius: 99px;
+  transition: .15s;
+}
+.logout-btn:hover { color: var(--red); border-color: var(--red); }
+
+/* ── Main wrapper ─────────────────────────────────── */
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+}
+
+/* ── Flash ────────────────────────────────────────── */
+.flash {
+  background: var(--accent-lt);
+  color: var(--accent);
+  border: 1px solid #f0c8a8;
+  border-radius: var(--radius);
+  padding: .75rem 1rem;
+  font-size: .9rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  animation: pop-in .25s ease;
+}
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Auth pages ───────────────────────────────────── */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+}
+
+.auth-box {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2.25rem 2rem;
+  width: 100%;
+  max-width: 400px;
+  animation: pop-in .3s ease;
+}
+
+.auth-top {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+.auth-emoji { font-size: 2.5rem; margin-bottom: .5rem; }
+.auth-top h1 { font-size: 1.45rem; font-weight: 800; }
+.auth-top p  { color: var(--muted); font-size: .9rem; margin-top: .3rem; }
+
+/* ── Form elements ────────────────────────────────── */
+form { display: flex; flex-direction: column; gap: .75rem; }
+
+label {
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--muted);
+  margin-bottom: -.35rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"] {
+  padding: .65rem .9rem;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: .95rem;
+  color: var(--text);
+  background: var(--cream);
+  transition: .15s;
+  width: 100%;
+}
+input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--accent-lt);
+}
+input::placeholder { color: var(--muted); opacity: .8; }
+
+.hint { font-weight: 400; text-transform: none; letter-spacing: 0; }
+
+/* ── Buttons ──────────────────────────────────────── */
+.btn-main {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: .7rem 1.25rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: .95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .15s;
+  text-align: center;
+}
+.btn-main:hover { background: #bf612d; transform: translateY(-1px); }
+.btn-main:active { transform: none; }
+
+.btn-cancel {
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: .65rem 1.1rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  transition: .15s;
+}
+.btn-cancel:hover { border-color: var(--muted); color: var(--text); }
+
+.switch-link {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: .875rem;
+  color: var(--muted);
+}
+.switch-link a { color: var(--accent); font-weight: 700; text-decoration: none; }
+.switch-link a:hover { text-decoration: underline; }
+
+/* ── Greeting ─────────────────────────────────────── */
+.greeting {
+  margin-bottom: 1.75rem;
+}
+.greeting h1 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.greeting p {
+  color: var(--muted);
+  font-size: .95rem;
+  margin-top: .35rem;
+}
+.greeting strong { color: var(--text); }
+
+/* ── Add task box ─────────────────────────────────── */
+.add-box {
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.35rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+}
+.add-box h2 {
+  font-size: .85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+  margin-bottom: .9rem;
+}
+
+.title-input {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  margin-bottom: .4rem;
+}
+
+.add-row {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+.note-input { flex: 2; min-width: 120px; }
+.due-input  { flex: 1; min-width: 120px; }
+
+.btn-add {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: .65rem 1.1rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: .9rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: .15s;
+}
+.btn-add:hover { background: #bf612d; }
+
+/* ── Section labels ───────────────────────────────── */
+.section-label {
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--muted);
+  margin-bottom: .6rem;
+  padding-bottom: .35rem;
+  border-bottom: 1px solid var(--border);
+}
+.done-label { margin-top: 1.5rem; opacity: .7; }
+
+/* ── Task cards ───────────────────────────────────── */
+.task-section { display: flex; flex-direction: column; }
+
+.task-card {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  background: var(--paper);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: .85rem 1rem;
+  margin-bottom: .55rem;
+  transition: .15s;
+  animation: pop-in .2s ease;
+}
+.task-card:hover { box-shadow: var(--shadow); }
+.task-card.task-done { opacity: .55; }
+
+/* Check button */
+.check-form { display: contents; }
+.check-btn {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: none;
+  cursor: pointer;
+  font-size: .9rem;
+  font-weight: 800;
+  color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .15s;
+  margin-top: .1rem;
+}
+.check-btn:hover { border-color: var(--green); color: var(--green); }
+.check-btn.checked {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+/* Task body */
+.task-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+}
+.task-title {
+  font-size: .95rem;
+  font-weight: 700;
+  word-break: break-word;
+}
+.task-note {
+  font-size: .82rem;
+  color: var(--muted);
+}
+.task-due {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-top: .1rem;
+}
+.task-due.overdue { color: var(--red); }
+.task-due.today   { color: var(--accent); }
+
+.struck {
+  text-decoration: line-through;
+  color: var(--muted) !important;
+}
+
+/* Edit / delete buttons */
+.task-btns {
+  display: flex;
+  gap: .3rem;
+  align-items: flex-start;
+  opacity: 0;
+  transition: .15s;
+}
+.task-card:hover .task-btns { opacity: 1; }
+
+.btn-edit,
+.btn-delete {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: .25rem .3rem;
+  border-radius: 7px;
+  transition: .15s;
+  text-decoration: none;
+}
+.btn-edit:hover   { background: var(--accent-lt); }
+.btn-delete:hover { background: var(--red-lt); }
+
+.delete-form { display: contents; }
+
+/* ── Empty state ──────────────────────────────────── */
+.empty {
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+  color: var(--muted);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+}
+.empty-emoji { font-size: 2.5rem; margin-bottom: .75rem; }
+.empty p { font-size: .95rem; }
+
+/* ── Edit page ────────────────────────────────────── */
+.edit-page { padding-top: 1.5rem; }
+.edit-box {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.75rem;
+}
+.back-link {
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.back-link:hover { color: var(--accent); }
+.edit-box h1 { font-size: 1.3rem; font-weight: 800; margin-bottom: 1.25rem; }
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: .6rem;
+  margin-top: .5rem;
+}
+
+/* ── Responsive ───────────────────────────────────── */
+@media (max-width: 520px) {
+  .add-row { flex-direction: column; }
+  .task-btns { opacity: 1; }
+  nav { padding: .75rem 1rem; }
+}

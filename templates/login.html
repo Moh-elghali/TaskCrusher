@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Log In — TaskCrusher{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+  <div class="auth-box">
+
+    <div class="auth-top">
+      <div class="auth-emoji">🗒️</div>
+      <h1>Welcome back!</h1>
+      <p>Log in and pick up where you left off.</p>
+    </div>
+
+    <form method="post" action="/login">
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" placeholder="your_username" autocomplete="username" required />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" placeholder="••••••" autocomplete="current-password" required />
+
+      <button type="submit" class="btn-main">Log In</button>
+    </form>
+
+    <p class="switch-link">
+      New here? <a href="/register">Create an account</a>
+    </p>
+
+  </div>
+</div>
+{% endblock %}

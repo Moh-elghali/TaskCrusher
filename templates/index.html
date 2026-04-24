@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+{% block title %}My Tasks — TaskCrusher{% endblock %}
+
+{% block content %}
+
+<!-- Greeting -->
+<div class="greeting">
+  <h1>
+    {% if hour < 12 %}Good morning{% elif hour < 17 %}Good afternoon{% else %}Good evening{% endif %},
+    {{ name }} 👋
+  </h1>
+  <p>
+    {% set pending = tasks | selectattr("done", "equalto", 0) | list | length %}
+    {% if pending == 0 %}
+      You're all caught up! Enjoy your day ☀️
+    {% elif pending == 1 %}
+      You have <strong>1 task</strong> left to do.
+    {% else %}
+      You have <strong>{{ pending }} tasks</strong> left to do.
+    {% endif %}
+  </p>
+</div>
+
+<!-- Add Task Form -->
+<div class="add-box">
+  <h2>Add a task</h2>
+  <form method="post" action="/add">
+    <input name="title" type="text" placeholder="What do you need to do?" required class="title-input" />
+    <div class="add-row">
+      <input name="note" type="text" placeholder="Any notes? (optional)" class="note-input" />
+      <input name="due" type="date" class="due-input" min="{{ today }}" />
+      <button type="submit" class="btn-add">+ Add</button>
+    </div>
+  </form>
+</div>
+
+<!-- Task List -->
+<div class="task-section">
+  {% if tasks %}
+    <!-- Pending tasks first -->
+    {% set pending_tasks = tasks | selectattr("done", "equalto", 0) | list %}
+    {% set done_tasks    = tasks | selectattr("done", "equalto", 1) | list %}
+
+    {% if pending_tasks %}
+      <h2 class="section-label">To Do</h2>
+      {% for task in pending_tasks %}
+        <div class="task-card">
+          <form method="post" action="/done/{{ task.id }}" class="check-form">
+            <button type="submit" class="check-btn" title="Mark as done">○</button>
+          </form>
+
+          <div class="task-info">
+            <span class="task-title">{{ task.title }}</span>
+            {% if task.note %}
+              <span class="task-note">{{ task.note }}</span>
+            {% endif %}
+            {% if task.due %}
+              <span class="task-due {% if task.due < today %}overdue{% elif task.due == today %}today{% endif %}">
+                📅
+                {% if task.due == today %}
+                  Due today!
+                {% elif task.due < today %}
+                  Overdue — was due {{ task.due }}
+                {% else %}
+                  Due {{ task.due }}
+                {% endif %}
+              </span>
+            {% endif %}
+          </div>
+
+          <div class="task-btns">
+            <a href="/edit/{{ task.id }}" class="btn-edit" title="Edit">✏️</a>
+            <form method="post" action="/delete/{{ task.id }}" class="delete-form"
+                  onsubmit="return confirm('Delete this task for good?')">
+              <button type="submit" class="btn-delete" title="Delete">🗑</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    {% if done_tasks %}
+      <h2 class="section-label done-label">Done ✓</h2>
+      {% for task in done_tasks %}
+        <div class="task-card task-done">
+          <form method="post" action="/done/{{ task.id }}" class="check-form">
+            <button type="submit" class="check-btn checked" title="Mark as not done">✓</button>
+          </form>
+
+          <div class="task-info">
+            <span class="task-title struck">{{ task.title }}</span>
+            {% if task.note %}
+              <span class="task-note struck">{{ task.note }}</span>
+            {% endif %}
+          </div>
+
+          <div class="task-btns">
+            <form method="post" action="/delete/{{ task.id }}" class="delete-form"
+                  onsubmit="return confirm('Remove this completed task?')">
+              <button type="submit" class="btn-delete" title="Delete">🗑</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+  {% else %}
+    <!-- Empty state -->
+    <div class="empty">
+      <div class="empty-emoji">📋</div>
+      <p>Nothing here yet. Add your first task above!</p>
+    </div>
+  {% endif %}
+</div>
+
+{% endblock %}
