@@ -16,44 +16,6 @@ Taskly lets you keep track of things you need to do. You can:
 - See a friendly **greeting** and a count of what's still pending
 - Tasks that are **overdue** are highlighted in red so nothing slips through
 
----
-
-## How to run it
-
-### 1. Open the folder in VS Code
-
-### 2. Create a virtual environment
-```bash
-python -m venv venv
-```
-
-### 3. Activate it
-```bash
-# Windows
-venv\Scripts\activate
-
-# Mac / Linux
-source venv/bin/activate
-```
-
-### 4. Install dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 5. Create the database
-```bash
-sqlite3 tasks.db < schema.sql
-```
-
-### 6. Run the app
-```bash
-flask run
-```
-
-Then open **http://127.0.0.1:5000** in your browser.
-
----
 
 ## Project structure
 
